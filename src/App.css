@@ -1,0 +1,50 @@
+
+@plugin "daisyui";
+
+:root{
+  --pb-ylw: #ffcc01;
+  --pb-red: #c2171b;
+  --pb-dark: #141414;
+}
+
+.pb_bg_ylw{
+  background-color: var(--pb-ylw);
+}
+.pb_bg_red{
+  background-color: var(--pb-red);
+  }
+.pb_bg_dark{
+  background-color: var(--pb-dark);
+}
+.pb_text_ylw{
+  color: var(--pb-ylw);
+}    
+
+.pb_text_red{
+  color: var(--pb-red);
+}
+.pb_text_dark{
+  color: var(--pb-dark);
+}
+
+
+.swiper-button-prev, .swiper-button-next{
+  background-color: var(--pb-ylw);
+  height: 45px !important;
+  width: 45px !important;
+  border-radius: 50%;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after{
+  font-size: 20px !important;
+  color: #fff;
+}
+.nav_none{
+  background-color: #fff !important;
+  height: 35px !important;
+  width: 35px !important;
+}
+
+.nav_none::after{
+  display: none;
+}
