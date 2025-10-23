@@ -35,7 +35,6 @@ const ApplyForm = () => {
   //   paymentProof: null,
   // });
 
-
   const {
     register,
     handleSubmit,
@@ -58,49 +57,48 @@ const ApplyForm = () => {
 
 
   const formvalue = watch();
-
   console.log("formvalue", formvalue)
-
-
-
-  const isStepValid = () => {
-    console.log('files')
-    const idFile = formvalue.idProof?.[0];
-    const qualificationFile = formvalue.qualificationCertificate?.[0];
-    console.log("ID File:", idFile);
-    console.log("Qualification File:", qualificationFile);
-    console.log("All form data:", formvalue);
-
-    if (step === 1) {
-      return formvalue.fullname && formvalue.email && formvalue.phone.trim().length >= 10 && formvalue.phone.trim().length <= 13 && formvalue.gender;
+  const isStepValid = (checkStep) => {
+    if (checkStep === 1) {
+      return (
+        formvalue.fullname &&
+        formvalue.email &&
+        formvalue.phone?.trim().length >= 10 &&
+        formvalue.phone?.trim().length <= 13 &&
+        formvalue.gender
+      );
     }
-    if (step === 2) {
+    if (checkStep === 2) {
       return (
         formvalue.guardianName &&
-        formvalue.guardianPhone.trim().length >= 10 && formvalue.phone.trim().length <= 13 &&
-        formvalue.idProof &&
+        formvalue.guardianPhone?.trim().length >= 10 &&
+        formvalue.guardianPhone?.trim().length <= 13 &&
+        formvalue.idProof?.length > 0 &&
         formvalue.qualificationCertificate?.length > 0
       );
     }
-
-    if (step == 3) {
+    if (checkStep === 3) {
       return (
         formvalue.guardianName &&
-        formvalue.guardianPhone.trim().length >= 10 && formvalue.phone.trim().length <= 13 &&
-        formvalue.idProof &&
+        formvalue.guardianPhone?.trim().length >= 10 &&
+        formvalue.guardianPhone?.trim().length <= 13 &&
+        formvalue.idProof?.length > 0 &&
         formvalue.qualificationCertificate?.length > 0
       );
     }
-
-
-
-    return true; // step 4 is payment, assume always valid
+    return true; 
   };
+
 
 
   const { slug } = useParams();
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, 4));
+  const nextStep = () => {
+    if (isStepValid(step)) {
+      setStep((prev) => Math.min(prev + 1, 4));
+    }
+  };
+  
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
   // const handleChange = (e) => {
@@ -132,14 +130,8 @@ const ApplyForm = () => {
     FetchCourse();
   }, []);
 
-  const handleSubmit1 = (e) => {
-    e.preventDefault();
-    alert("Application Submitted Successfully!");
-  };
+ 
   const filteredbyslug = course.filter((course) => course.course_url_link == slug)
-
-
-
 
   // responsive
   return isLoading ? (
@@ -159,23 +151,17 @@ const ApplyForm = () => {
               key={index}
 
               onClick={() => {
-                if (index + 1 < step) {
-                  setStep(index + 1)
-                }
-                else {
-                  let canGo = true;
-                  for (let i = 1; i <= index; i++) {
-                    setStep(i);
-
-                    if (!isStepValid()) {
-                      canGo = false;
-                      break;
-                    }
+                // Check all previous steps before moving to clicked step
+                let canGo = true;
+                for (let i = 1; i <= index; i++) {
+                  if (!isStepValid(i)) {
+                    canGo = false;
+                    break;
                   }
-                  if (canGo) { setStep(index + 1); }
-
                 }
+                if (canGo) setStep(index + 1);
               }}
+
               className={`flex items-center cursor-pointer px-3 py-2 rounded-lg transition-all ${step === index + 1
                 ? "bg-red-500 text-white font-bold shadow-md"
                 : "text-gray-600"
@@ -240,7 +226,7 @@ const ApplyForm = () => {
               )}
 
               <input
-                type="text"
+                type="number"
                 placeholder="Phone Number"
                 {...register("phone", {
                   required: "Enter Your Phone Number",
@@ -298,7 +284,7 @@ const ApplyForm = () => {
               )}
 
               <input
-                type="text"
+                type="number"
                 placeholder="Guardian's Phone"
                 {...register("guardianPhone", {
                   required: "Enter Your Guardian Phone",
@@ -320,7 +306,7 @@ const ApplyForm = () => {
               )}
 
               <div className="mt-3">
-                <label className="block mb-1">Upload ID Proof (Aadhar):</label>
+                <label className="block mb-1">Upload ID Proof (Aadhar Card)</label>
                 <div className="flex">
                   <input
                     type="text"
@@ -355,7 +341,7 @@ const ApplyForm = () => {
               </div>
 
               <div className="mt-3">
-                <label className="block mb-1">Upload Last Qualification Certificate:</label>
+                <label className="block mb-1">Your  Last Qualification Certificate:</label>
                 <div className="flex">
                   {/* Text input to show file name */}
                   <input
@@ -460,7 +446,7 @@ const ApplyForm = () => {
             )}
 
             {
-              step < 4 && isStepValid() && (
+              step < 4 && isStepValid(step) && (
                 <button
                   type="button"
                   onClick={nextStep}
