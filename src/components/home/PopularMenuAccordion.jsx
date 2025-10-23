@@ -9,7 +9,7 @@ const MenuAccordion = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const menuItems = ["Home", "Courses", "About", "Contact","whychooseus"];
+  const menuItems = ["Home", "Courses", "About", "Contact","Why choose us"];
 
   function HandleNavigate(text) {
     console.log("as", text);

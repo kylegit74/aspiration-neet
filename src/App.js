@@ -42,7 +42,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/contact' element={<ContactPage/>}/>
-        <Route path='/whychooseus' element={<WhyChooseUs/>}/>
+        <Route path='/why-choose-us' element={<WhyChooseUs/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path="/download" element={<Notices/>}/>
         
