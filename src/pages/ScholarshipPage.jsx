@@ -6,7 +6,7 @@ import Spinner from "../components/Spinner";
 
 const ScholarshipPage = () => {
   const [openIndex, setOpenIndex] = useState(null);
-  const [isLoading , setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [Data, setData] = useState([]);
 
   const toggleAccordion = (index) => {
@@ -70,7 +70,7 @@ const ScholarshipPage = () => {
 
   return (
     <MainLayout>
-     {isLoading? <Spinner/>: <div className="text-white min-h-screen px-4 md:px-8 py-6 mt-[60px]">
+      {isLoading ? <Spinner /> : <div className="text-white min-h-screen px-4 md:px-8 py-6 mt-[60px]">
         {/* Page Header */}
         <header className="text-center text-2xl md:text-3xl font-bold mb-6">
           SMART 2025 SCHOLARSHIP
@@ -90,7 +90,7 @@ const ScholarshipPage = () => {
             Exam Details
           </h2>
           <p>{Data[0]?.exam_details}</p>
-          <a href=""/>
+          <a href="" />
           <Link className=" text-red-500" to={`https://admin.aspirationjeeneet.in/${Data[0]?.exam_details_pdf_uploaded}`}>
             Download Pdf
           </Link>
@@ -105,7 +105,7 @@ const ScholarshipPage = () => {
         </section>
 
         {/* FAQ Section */}
-        
+
         <section className="bg-white text-black p-4 md:p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl md:text-2xl font-semibold mb-4 text-red-500">
             Frequently Asked Questions
@@ -130,7 +130,7 @@ const ScholarshipPage = () => {
                 {openIndex === index && (
                   <p className="p-2 text-gray-700 bg-gray-100 rounded-md">
                     {index === 0 ? (
-                    
+
                       <a
                         href={`https://admin.aspirationjeeneet.in/${Data[0].faq_pdf_uploaded}`}
                         target="_blank"
@@ -140,7 +140,7 @@ const ScholarshipPage = () => {
                         Download PDF
                       </a>
                     ) : (
-                      
+
                       Data[0][`faq_ans_${index + 1}`]
                     )}
                   </p>
@@ -161,7 +161,7 @@ const ScholarshipPage = () => {
         </div>
       </div>}
     </MainLayout>
-          )
+  )
 };
 
 export default ScholarshipPage;

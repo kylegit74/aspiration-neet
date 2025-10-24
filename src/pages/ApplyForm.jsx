@@ -111,6 +111,7 @@ const ApplyForm = () => {
 
   const [course, setCourse] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const[selectedCourse, setSelectedCourse]=useState(null)
   //Fething courses
 
   useEffect(() => {
@@ -129,6 +130,11 @@ const ApplyForm = () => {
     }
     FetchCourse();
   }, []);
+
+  useEffect(()=>{
+
+
+  },[selectedCourse])
 
  
   const filteredbyslug = course.filter((course) => course.course_url_link == slug)
@@ -250,7 +256,8 @@ const ApplyForm = () => {
               <select
                 {...register("gender", { required: "Select Your Gender" })}
                 className="w-full p-3 border rounded-md mt-3"
-              >
+                value={formvalue.gender}
+             >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -306,7 +313,7 @@ const ApplyForm = () => {
               )}
 
               <div className="mt-3">
-                <label className="block mb-1">Upload ID Proof (Aadhar Card)</label>
+                <label className="block mb-1">Upload Your ID Proof (Aadhar Card)</label>
                 <div className="flex">
                   <input
                     type="text"
@@ -376,7 +383,7 @@ const ApplyForm = () => {
                     htmlFor="qualificationCertificateInput"
                     className="px-4 py-3 bg-red-500 text-white rounded-r-md cursor-pointer"
                   >
-                    Upload                  </label>
+                    Upload </label>
                 </div>
 
                 {errors.qualificationCertificate && (
@@ -398,14 +405,25 @@ const ApplyForm = () => {
                 <label htmlFor="coursename" className="block text-gray-700 font-medium mb-1">
                   Course Name:
                 </label>
-                <input
+                <select
                   type="text"
                   id="coursename"
-                  disabled
+                  name="coursename"
+
+                  {...register ("coursename",{required:"please select course "})}
+                  
                   placeholder="Enter course name"
-                  defaultValue={filteredbyslug[0]?.name}
+                  value={selectedCourse? selectedCourse.name :filteredbyslug[0]?.name}
+                  onChange={(e)=>{
+                     const courseobj= course.find((crs)=>crs.name===e.target.value)
+                     setSelectedCourse(courseobj)
+                  }}
                   className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                />
+                >
+                  {course.map((crs)=>
+                  <option>{crs.name}</option>
+                  )}
+                </select>
               </div>
 
               <div>
@@ -414,10 +432,13 @@ const ApplyForm = () => {
                 </label>
                 <input
                   type="text"
+                  name="courseprice"
                   id="courseprice"
+                  {...register ("courseprice")}
+
                   disabled
                   placeholder="Enter course price"
-                  defaultValue={filteredbyslug[0]?.price}
+                  value={selectedCourse? selectedCourse.price: filteredbyslug[0]?.price}
                   className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                 />
               </div>

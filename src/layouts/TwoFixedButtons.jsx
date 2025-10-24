@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 
 function SideFixedButtons() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   // Function to toggle visibility on scroll
-  function ShowWhenOverSpecificScroll() {
-    if (window.scrollY > 100) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  }
+  // function ShowWhenOverSpecificScroll() {
+  //   if (window.scrollY > 100) {
+  //     setShow(true);
+  //   } else {
+  //     setShow(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    window.addEventListener("scroll", ShowWhenOverSpecificScroll);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", ShowWhenOverSpecificScroll);
+  // }, []);
 
   return (
     <>

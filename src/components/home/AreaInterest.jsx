@@ -30,6 +30,7 @@ const AreaInterest = () => {
     }
     fetchCourses();
   }, []);
+  
  function handleExploreCourse()
  {
   setisclickoncoursecategory("")
@@ -87,7 +88,7 @@ const AreaInterest = () => {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-4 mt-4">
                       <Link
-                        to={`/course/apply/${course.course_tbl_unique_id}`}
+                        to={`/course/apply/${course?.course_url_link}`}
                         className="bg-white text-red-500 rounded-full px-3 py-2 sm:px-4 sm:py-2 flex-grow sm:flex-grow-0 flex items-center justify-center font-medium text-sm sm:text-base w-full sm:w-auto"
                       >
                         Enroll Now <BiChevronRight className="text-xl" />

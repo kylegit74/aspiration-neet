@@ -109,7 +109,7 @@ function CourseCard() {
       ) : (
         <>
           {filteredCourses.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
               {filteredCourses.map((course) => (
                 <div
                   key={course.id}
@@ -139,7 +139,7 @@ function CourseCard() {
                         )}
                         <span className="text-red-600 text-sm">
                           <IndianRupee className="inline mr-1" size={16} />
-                          {course.priceRange ? course.priceRange : "50000"}
+                          {course.price ? course.price : "50000"}
                         </span>
                       </div>
                       <span
