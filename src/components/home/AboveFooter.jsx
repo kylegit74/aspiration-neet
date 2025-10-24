@@ -107,13 +107,13 @@ function AboveFooter() {
             </p>
 
             <div className="flex justify-center ml-[-10px] w-full">
-              <Link 
+              <a 
                 className="flex items-center gap-2 font-bold text-lg text-red-600 hover:text-red-800 transition duration-300 group" 
-                to="/"
+                href="tel:+919998069806"
               >
                 <Phone className="bg-yellow-200 text-red-600 w-10 h-10 rounded-full p-2 transition duration-300 group-hover:bg-yellow-300" />
                 <span className="text-base sm:text-lg">+91 9998069806</span>
-              </Link>
+              </a>
             </div>
           </div>
 

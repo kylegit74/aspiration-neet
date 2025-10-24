@@ -9,13 +9,17 @@ const MenuAccordion = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const menuItems = ["Home", "Courses", "About", "Contact","Why choose us"];
+  const menuItems = ["Home", "Courses", "About", "Contact","Why Choose Us"];
 
   function HandleNavigate(text) {
     console.log("as", text);
     if (text === "Home") {
       navigate("/");
-    } else {
+    }
+    else if(text==='Why Choose Us'){
+      navigate('/why-choose-us')
+    }
+     else {
       const textlower = text.toLowerCase();
       setisclickoncoursecategory("");
       setCategory([]);

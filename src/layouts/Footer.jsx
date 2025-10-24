@@ -73,12 +73,12 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-2 justify-center md:justify-start">
                   <IoCall className="text-yellow-400" />
-                  <span>  +91 9998029802 /+91 9998069806  </span>
+                  <span> <a href="tel:+919998029802">+919998029802</a> <a href="tel:+919998069806 ">/ +919998069806 </a>  </span>
                 </div>
-                <div className="flex items-center gap-2 justify-center md:justify-start">
+                <a href="mailto:aspirationiasacademy@gmail.com" className="flex sm:hidden lg:flex items-center gap-2 justify-center  md:justify-start">
                   <MdEmail className="text-yellow-400" />
                   <span>aspirationiasacademy@gmail.com</span>
-                </div>
+                </a>
               </div>
             </div>
           </div>

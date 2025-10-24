@@ -68,9 +68,9 @@ const ScholarshipPage = () => {
     },
   ];
 
-  return isLoading? <Spinner/> :(
+  return (
     <MainLayout>
-      <div className="text-white min-h-screen px-4 md:px-8 py-6 mt-[60px]">
+     {isLoading? <Spinner/>: <div className="text-white min-h-screen px-4 md:px-8 py-6 mt-[60px]">
         {/* Page Header */}
         <header className="text-center text-2xl md:text-3xl font-bold mb-6">
           SMART 2025 SCHOLARSHIP
@@ -147,6 +147,7 @@ const ScholarshipPage = () => {
                 )}
               </div>
             ))}
+
         </section>
 
         {/* Enquiry Now Button */}
@@ -158,9 +159,9 @@ const ScholarshipPage = () => {
             Enquiry Now
           </Link>
         </div>
-      </div>
+      </div>}
     </MainLayout>
-  );
+          )
 };
 
 export default ScholarshipPage;

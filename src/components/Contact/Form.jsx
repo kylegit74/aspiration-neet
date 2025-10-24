@@ -24,7 +24,7 @@ function Form() {
               {[{icon: Phone, title: 'Phone', content: '+91 9998069806 / 9998029802'},
               
                 {icon: Mail, title: 'Email', content: 'aspirationiasacademy@gmail.com'},
-                {icon: MapPin, title: 'Address', content: '123 Education Street, Knowledge City, India'}
+                {icon: MapPin, title: 'Address', content: 'BC-16, Street Number 113, Action Area I, Newtown, Kolkata, WB 700163'}
               ].map(({ icon: Icon, title, content }, index) => (
                 <div key={index} className="flex items-center gap-3 sm:gap-4">
                   <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-100">

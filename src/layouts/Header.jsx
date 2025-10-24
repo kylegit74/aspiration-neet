@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { BiCaretDown, BiSearch, BiMenu, BiX } from "react-icons/bi";
-import { motion } from "framer-motion";
+import { BiCaretDown, BiMenu, BiX } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { videoContext } from "../components/ContextApi/HomePageVideoContext";
 
@@ -8,58 +7,45 @@ const Header = () => {
   const [isCoursesOpen, setIsCoursesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-  const {setisclickoncoursecategory}=useContext(videoContext)
-  const navigate=useNavigate()
+  const { setisclickoncoursecategory } = useContext(videoContext);
+  const navigate = useNavigate();
 
+  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024); 
+      setIsMobile(window.innerWidth < 1024);
       if (window.innerWidth >= 1024) {
         setIsMobileMenuOpen(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Navigate with context set
+  function handleRoute(text) {
+    setisclickoncoursecategory(text);
+    navigate("/courses");
+  }
+
+  // Toggle courses in mobile
   const handleCoursesClick = () => {
     if (isMobile) {
       setIsCoursesOpen(!isCoursesOpen);
     }
   };
 
-  const handleMouseEnter = () => {
-    if (!isMobile) {
-      setIsCoursesOpen(true);
-    }
-  };
-  function handleRoute(text)
-  {
-    setisclickoncoursecategory(text);
-    navigate('/courses')
-    
-  }
-
-  const handleMouseLeave = () => {
-    if (!isMobile) {
-      setTimeout(() => {
-        setIsCoursesOpen(false);
-      }, 100);
-    }
-  };
-
   return (
     <header className="pb_bg_ylw left-0 w-full z-[50] fixed top-[50px] shadow-md h-16">
-      <div className="container max-w-7xl mx-auto flex justify-between items-center h-full relative  z-[-10px] px-4 lg:px-2">
-        {/* Logo Section */}
+      <div className="container max-w-7xl mx-auto flex justify-between items-center h-full relative px-4 lg:px-2">
+        {/* Logo */}
         <Link className="relative z-10 flex items-center mt-[10px]" to={"/"}>
-          <div className="bg-red-600 text-white rounded-b-2xl h-[80px] lg:h-[110px] px-2 lg:px-6 py-2 lg:py-4   text-center font-medium flex flex-col justify-center">
-            <span className="block text-[14px] lg:text-[20px] mt-5 pb-[-4px] ">
+          <div className="bg-red-600 text-white rounded-b-2xl h-[80px] lg:h-[110px] px-2 lg:px-6 py-2 lg:py-4 text-center font-medium flex flex-col justify-center">
+            <span className="block text-[14px] lg:text-[20px] mt-5">
               ASPIRATION
             </span>
             <span className="text-[12px] lg:text-[26px]">JEE & NEET</span>
-            <span className=" text-[10px] lg:text-[20px] pt-[-2px] mb-[10px]">ACADEMY</span>
+            <span className="text-[10px] lg:text-[20px] mb-[10px]">ACADEMY</span>
           </div>
         </Link>
 
@@ -71,28 +57,28 @@ const Header = () => {
           {isMobileMenuOpen ? <BiX /> : <BiMenu />}
         </button>
 
-        {/* Navigation Bar */}
+        {/* Navigation */}
         <nav
-          className={`lg:flex text-[18px] flex-col items-center  lg:flex-row justify-center space-y-4 lg:space-y-0 lg:space-x-6 fixed lg:relative top-[110px] md:top-[113px] md:top-[105px] lg:top-0 left-0 w-full lg:w-auto pb_bg_ylw lg:bg-transparent shadow-md lg:shadow-none p-4 lg:p-0 z-[9px] h-[calc(100vh-4rem)] lg:h-auto ${
+          className={`lg:flex text-[18px] flex-col items-center lg:flex-row justify-center space-y-4 lg:space-y-0 lg:space-x-6 fixed lg:relative top-[110px] lg:top-0 left-0 w-full lg:w-auto pb_bg_ylw lg:bg-transparent shadow-md lg:shadow-none p-4 lg:p-0 z-[9] h-[calc(100vh-4rem)] lg:h-auto ${
             isMobileMenuOpen ? "block overflow-y-auto" : "hidden"
           } lg:flex`}
         >
-          <div className="flex ">
-            <Link
-              to="/"
-              className="hover:pb_text_red text-[20px] md:ml-1 text-left font-medium block lg:inline-block"
-            >
-              Home
-            </Link>
-          </div>
+          <Link
+            to="/"
+            className="hover:pb_text_red text-[20px] md:ml-1 font-medium block lg:inline-block"
+          >
+            Home
+          </Link>
 
+          {/* Courses Dropdown */}
           <div
             className="relative"
-            onMouseEnter={handleMouseEnter}
+            onMouseEnter={() => !isMobile && setIsCoursesOpen(true)}
+            onMouseLeave={() => !isMobile && setIsCoursesOpen(false)}
           >
             <button
               onClick={handleCoursesClick}
-              className="hover:pb_text_red  cursor-pointer font-medium text-[20px] block lg:inline-block w-full text-left group"
+              className="hover:pb_text_red cursor-pointer font-medium text-[20px] block lg:inline-block w-full text-left group"
             >
               Courses
               <BiCaretDown
@@ -102,15 +88,13 @@ const Header = () => {
               />
             </button>
 
-            {/* Dropdown Menu */}
             {isCoursesOpen && (
               <div
-                onMouseLeave={handleMouseLeave}
                 className={`${
                   isMobile
                     ? "relative w-full mt-2 bg-gray-50"
-                    : "absolute left-0 lg:left-auto top-[50px] ml-[-60px]"
-                } z-20 bg-white shadow-xl border rounded-lg p-4`}
+                    : "absolute left-0 top-[30px] ml-[-60px]"
+                } z-20 bg-[#FFCC01] shadow-xl border rounded-lg p-4`}
               >
                 <div
                   className={`flex flex-col lg:flex-row ${
@@ -122,29 +106,29 @@ const Header = () => {
                       Course Categories
                     </h3>
                     <ul className="mt-2 space-y-1 cursor-pointer">
-                      <li   className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
-                         onClick={()=>handleRoute('Classroom')}>
-                        
-                        
-                          Classroom
-                       
+                      <li
+                        className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
+                        onClick={() => handleRoute("Classroom")}
+                      >
+                        Classroom
                       </li>
-                     
-                      <li   className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
-                         onClick={()=>handleRoute('Non Classroom')}>
-                          Non-Classroom
-                      
+                      <li
+                        className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
+                        onClick={() => handleRoute("Non Classroom")}
+                      >
+                        Non-Classroom
                       </li>
-                      <li   className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
-                        onClick={()=>handleRoute('Integrated Classroom')}>
-                          Integrated School Programme
-                        
+                      <li
+                        className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
+                        onClick={() => handleRoute("Integrated Classroom")}
+                      >
+                        Integrated School Programme
                       </li>
-                    
-                      <li   className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
-                         onClick={()=>handleRoute(' Online Course')}>
-                          Online Course
-                        
+                      <li
+                        className="block px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors"
+                        onClick={() => handleRoute("Online Course")}
+                      >
+                        Online Course
                       </li>
                     </ul>
                   </div>
@@ -153,37 +137,33 @@ const Header = () => {
             )}
           </div>
 
-          {[
-            "Why Choose Us",
-            "About",
-            "Contact",
-            "Download",
-            "Scholarship",
-          ].map((item) => (
-            <div key={item} className="flex  items-center">
+          <Link
+            to="/why-choose-us"
+            className="hover:pb_text_red text-[20px] md:ml-1 font-medium block lg:inline-block"
+          >
+            Why Choose Us 
+          </Link>
+
+          {/* Other Menu Links */}
+          {[ "About", "Contact", "Download", "Scholarship"].map(
+            (item) => (
               <Link
+                key={item}
                 to={`/${item.toLowerCase().replace(/\s+/g, "")}`}
-                className="hover:pb_text_red  font-medium block text-[20px]  lg:inline-block"
+                className="hover:pb_text_red font-medium block text-[20px] lg:inline-block"
               >
                 {item}
               </Link>
-            </div>
-          ))}
-          <Link to='/contact' className="mt-[10px] px-6 py-2 pb_bg_red text-white rounded-md hidden xl:block">
-            
-              Enquiry Now
-            
+            )
+          )}
+
+          <Link
+            to="/contact"
+            className="mt-[10px] px-6 py-2 pb_bg_red text-white rounded-md hidden xl:block"
+          >
+            Enquiry Now
           </Link>
         </nav>
-
-        {/*   <div className="hidden lg:flex space-x-4 items-center">
-          <Link to={'/search'}>
-            <button className="pb_bg_red text-white px-4 py-2 rounded-full hover:bg-black transition-colors">
-              <BiSearch />
-            </button>
-          </Link> 
-        </div> */}
-      
       </div>
     </header>
   );

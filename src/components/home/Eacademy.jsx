@@ -36,9 +36,9 @@ const Eacademy = () => {
                 <button  onClick={handleNavigate} className="bg-red-600 hover:bg-red-700 rounded-full px-5 py-2 flex items-center gap-2 text-white font-medium text-sm md:text-base transition-all duration-300">
                   Explore Courses <BiChevronRight className="text-lg md:text-2xl" />
                 </button>
-                <button className="border border-white rounded-full px-5 py-2 flex items-center gap-2 text-red-600 font-medium text-sm md:text-base transition-all duration-300">
+                <a href="tel:+919998069806" className="border border-white rounded-full px-5 py-2 flex items-center gap-2 text-red-600 font-medium text-sm md:text-base transition-all duration-300">
                   +91 9998069806 <BiChevronRight className="text-lg md:text-2xl" />
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -89,9 +89,9 @@ const Eacademy = () => {
                 </Link>
 
                 {/* Phone Number Button */}
-                <button className="relative z-[-10px] mx-auto my-2 sm:my-4 border border-white rounded-full px-3 py-1 sm:px-4 sm:py-2 flex gap-1 sm:gap-2 text-white items-center font-semibold text-xs sm:text-sm">
+                <a  href="tel:+919998029802" className="relative z-[-10px] mx-auto my-2 sm:my-4 border border-white rounded-full px-3 py-1 sm:px-4 sm:py-2 flex gap-1 sm:gap-2 text-white items-center font-semibold text-xs sm:text-sm">
                   +91 9998029802 <BiChevronRight className="text-lg sm:text-2xl" />
-                </button>
+                </a>
               </div>
             </div>
           </div>
