@@ -72,11 +72,11 @@ function SelectedCategorySet(text)
     <>
       <TopNavbar />
       <MainLayout>
-        <div className="lg:min-h-screen bg-yellow-50 mt-[120px] md:py-8 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
+        <div className="lg:min-h-screen bg-yellow-50 mt-[100px] md:py-8 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto py-1">
             {/* Header */}
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-red-800 mb-2 mt-2">Download</h1>
+              <h1 className="text-4xl font-bold text-red-800 mb-2  mt-10 sm:mt-2">Download</h1>
               <p className="text-yellow-700">
                 Stay updated with the latest announcements
               </p>
@@ -121,7 +121,7 @@ function SelectedCategorySet(text)
                 <Spinner />
               </div>
             ) : filteredNotices.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 pb-10">
                 {filteredNotices.map((notice) => (
                   <div
                     key={notice?.id}
