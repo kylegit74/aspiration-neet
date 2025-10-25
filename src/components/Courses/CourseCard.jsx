@@ -53,7 +53,7 @@ function CourseCard() {
 
     // Apply search filter
     if (coursesearchquery) {
-      const searchLower = coursesearchquery.toLowerCase();
+      const searchLower = coursesearchquery.trim('').toLowerCase();
       filtered = filtered.filter(
         (course) =>
           course.name?.toLowerCase().includes(searchLower) ||

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BiCaretDown, BiMenu, BiX } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { videoContext } from "../components/ContextApi/HomePageVideoContext";
 
 const Header = () => {
@@ -9,6 +9,7 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const { setisclickoncoursecategory } = useContext(videoContext);
   const navigate = useNavigate();
+  const location = useLocation(); 
 
   // Handle window resize
   useEffect(() => {
@@ -22,18 +23,19 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Navigate with context set
   function handleRoute(text) {
     setisclickoncoursecategory(text);
     navigate("/courses");
   }
 
-  // Toggle courses in mobile
   const handleCoursesClick = () => {
     if (isMobile) {
       setIsCoursesOpen(!isCoursesOpen);
     }
   };
+
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <header className="pb_bg_ylw left-0 w-full z-[50] fixed top-[50px] shadow-md h-16">
@@ -65,7 +67,9 @@ const Header = () => {
         >
           <Link
             to="/"
-            className="hover:pb_text_red text-[20px] md:ml-1 font-medium block lg:inline-block"
+            className={`text-[20px] md:ml-1 font-medium block lg:inline-block hover:pb_text_red ${
+              isActive("/") ? "pb_text_red font-semibold" : ""
+            }`}
           >
             Home
           </Link>
@@ -78,7 +82,9 @@ const Header = () => {
           >
             <button
               onClick={handleCoursesClick}
-              className="hover:pb_text_red cursor-pointer font-medium text-[20px] block lg:inline-block w-full text-left group"
+              className={`cursor-pointer font-medium text-[20px] block lg:inline-block w-full text-left group hover:pb_text_red ${
+                isActive("/courses") ? "pb_text_red font-semibold" : ""
+              }`}
             >
               Courses
               <BiCaretDown
@@ -139,30 +145,33 @@ const Header = () => {
 
           <Link
             to="/why-choose-us"
-            className="hover:pb_text_red text-[20px] md:ml-1 font-medium block lg:inline-block"
+            className={`text-[20px] md:ml-1 font-medium block lg:inline-block hover:pb_text_red ${
+              isActive("/why-choose-us") ? "pb_text_red font-semibold" : ""
+            }`}
           >
-            Why Choose Us 
+            Why Choose Us
           </Link>
 
-          {/* Other Menu Links */}
-          {[ "About", "Contact", "Download", "Scholarship"].map(
-            (item) => (
-              <Link
-                key={item}
-                to={`/${item.toLowerCase().replace(/\s+/g, "")}`}
-                className="hover:pb_text_red font-medium block text-[20px] lg:inline-block"
-              >
-                {item}
-              </Link>
-            )
-          )}
+          {["About", "Contact", "Download", "Scholarship"].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.toLowerCase().replace(/\s+/g, "")}`}
+              className={`font-medium block text-[20px] lg:inline-block hover:pb_text_red ${
+                isActive(`/${item.toLowerCase().replace(/\s+/g, "")}`)
+                  ? "pb_text_red font-semibold"
+                  : ""
+              }`}
+            >
+              {item}
+            </Link>
+          ))}
 
-          <Link
-            to="/contact"
+          <a
+            href="tel:+919998029802"
             className="mt-[10px] px-6 py-2 pb_bg_red text-white rounded-md hidden xl:block"
           >
             Enquiry Now
-          </Link>
+          </a>
         </nav>
       </div>
     </header>

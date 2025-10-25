@@ -69,8 +69,8 @@ const AllNoticePage = () => {
   useEffect(() => {
     const filtered = Notices.filter((item) => {
       if (
-        item?.name?.toLocaleLowerCase().includes(searchTerm) ||
-        item?.short_content?.toLocaleLowerCase().includes(searchTerm)
+        item?.name?.toLocaleLowerCase().includes(searchTerm.trim('')) ||
+        item?.short_content?.toLocaleLowerCase().includes(searchTerm.trim(''))
       ) {
         return item;
       }

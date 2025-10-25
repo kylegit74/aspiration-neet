@@ -24,6 +24,7 @@ const NoticeView = () => {
       const res = await FetchAllDownloadData();
       setDownloads(res.data);
       setIsLoading(false);
+      console.log('download',res.data)
     } catch (error) {
       setIsLoading(false);
     }
@@ -38,11 +39,24 @@ const NoticeView = () => {
     ...new Set(downloads.map((item) => item.category)),
   ];
 
+//unselecting 
+function SelectedCategorySet(text)
+{
+  if(text===selectedCategory)
+  {
+    setSelectedCategory("all");
+  }
+  else{
+   setSelectedCategory(text)
+  }
+
+}
+
   // Filtered notices
   const filteredNotices = downloads.filter((notice) => {
     const matchesSearch =
-      notice?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      notice?.description?.toLowerCase().includes(searchTerm.toLowerCase());
+      notice?.name?.toLowerCase().includes(searchTerm.trim('').toLowerCase()) ||
+      notice?.full_content?.toLowerCase().includes(searchTerm.trim('').toLowerCase());
     const matchesCategory =
       selectedCategory.toLowerCase() === "all" ||
       notice?.category?.toLowerCase() === selectedCategory.toLowerCase();
@@ -92,7 +106,7 @@ const NoticeView = () => {
                           ? "bg-red-600 text-white"
                           : "bg-yellow-200 text-red-700 hover:bg-yellow-300"
                       }`}
-                      onClick={() => setSelectedCategory(category.toLowerCase())}
+                      onClick={()=>SelectedCategorySet(category.toLowerCase())}
                     >
                       {category}
                     </button>
