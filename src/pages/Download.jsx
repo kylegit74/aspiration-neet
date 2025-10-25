@@ -72,11 +72,11 @@ function SelectedCategorySet(text)
     <>
       <TopNavbar />
       <MainLayout>
-        <div className="min-h-screen bg-yellow-50 mt-[120px] md:py-8 px-4 sm:px-6 lg:px-8">
+        <div className="lg:min-h-screen bg-yellow-50 mt-[120px] md:py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-red-800 mb-2">Download</h1>
+              <h1 className="text-4xl font-bold text-red-800 mb-2 mt-2">Download</h1>
               <p className="text-yellow-700">
                 Stay updated with the latest announcements
               </p>
@@ -145,7 +145,7 @@ function SelectedCategorySet(text)
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
                       <a
                         href={`https://admin.aspirationjeeneet.in/${notice?.pdf_uploaded}`}
-                        className="w-full sm:w-auto text-center text-red-600 hover:underline text-sm sm:text-base"
+                        className="w-full sm:w-auto text-center text-red-600 hover:underline bg-[#FFCC01]  px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-black  text-sm sm:text-base"
                       >
                         Download PDF
                       </a>

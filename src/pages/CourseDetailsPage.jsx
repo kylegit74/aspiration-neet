@@ -107,17 +107,19 @@ function CourseDetailsPage() {
     Navigate(`/course/apply/${slug}`);
   }
 
-  return isLoading? <><Spinner/> </>:(
+  return (
     <MainLayout>
-      <div className="min-h-screen bg-gray-50 mt-[110px]">
+     
+     {isLoading? <Spinner/>:( <div className=" bg-gray-50 mt-[110px]">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-red-50 to-yellow-50 py-16">
+        
+        <div className="bg-gradient-to-r from-red-50 to-yellow-50 py-8 sm:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row gap-8">
               <div className="lg:w-2/3">
-                <span className="bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm font-semibold">
+                {/* <span className="bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm font-semibold">
                   {filtered[0]?.category ? course.category : "classroom"}
-                </span>
+                </span> */}
                 <h1 className="text-2xl md:text-4xl font-bold mt-6 mb-4 text-gray-900">
                   {filtered[0]?.name}
                 </h1>
@@ -237,7 +239,7 @@ function CourseDetailsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div>)}
     </MainLayout>
   );
 }

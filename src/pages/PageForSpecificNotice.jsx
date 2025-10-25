@@ -40,7 +40,7 @@ return (
   <>
     <TopNavbar />
     <MainLayout>
-      <div className="flex justify-center items-center mt-[100px] py-8 md:mt-[90px] md:min-h-screen bg-gray-100 px-4">
+      <div className="flex justify-center items-center mt-[100px] py-8 md:mt-[90px] min-h-[40vh] xl:min-h-screen bg-gray-100 px-4">
         <div className="bg-white rounded-lg shadow-lg p-5 sm:p-8 max-w-3xl w-full">
           {isLoading ? (
             <div className="flex justify-center py-10">

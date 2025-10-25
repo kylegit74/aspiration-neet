@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-{/* Responsive done*/}
+{/* Responsive done*/ }
 function Form() {
   return (
     <div className="relative overflow-hidden mt-[100px] bg-gradient-to-br from-white to-yellow-50/30 px-4 py-16 sm:px-6 lg:px-8">
@@ -21,19 +21,27 @@ function Form() {
           <div className="w-full max-w-lg rounded-xl bg-white p-6 sm:p-8 shadow-lg flex flex-col text-center sm:text-left">
             <h3 className="mb-6 text-xl font-semibold text-gray-900">Contact Information</h3>
             <div className="space-y-4">
-              {[{icon: Phone, title: 'Phone', content: '+91 9998069806 / 9998029802'},
-              
-                {icon: Mail, title: 'Email', content: 'aspirationiasacademy@gmail.com'},
-                {icon: MapPin, title: 'Address', content: 'BC-16, Street Number 113, Action Area I, Newtown, Kolkata, WB 700163'}
+              {[
+                { icon: Phone, title: 'Phone', content: '+91 9998069806 / 9998029802' },
+
+                { icon: Mail, title: 'Email', content: 'aspirationiasacademy@gmail.com' },
+                { icon: MapPin, title: 'Address', content: 'BC-16, Street Number 113, Action Area I, Newtown, Kolkata, WB 700163' },
+
+
               ].map(({ icon: Icon, title, content }, index) => (
+
                 <div key={index} className="flex items-center gap-3 sm:gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-100">
+                  <div className="flex items-center justify-start sm:justify-center w-10 h-10 rounded-lg lg:bg-yellow-100">
                     <Icon className="h-6 w-6 text-yellow-600" />
                   </div>
-                  <div className="text-left">
+
+                  {title === 'Address' ? <div className="text-left ml-4">
                     <p className="font-medium text-gray-900">{title}</p>
                     <p className="text-gray-600 text-sm sm:text-base">{content}</p>
-                  </div>
+                  </div> : <div className="text-left">
+                    <p className="font-medium text-gray-900">{title}</p>
+                    <p className="text-gray-600 text-sm sm:text-base">{content}</p>
+                  </div>}
                 </div>
               ))}
             </div>
@@ -70,7 +78,7 @@ function Form() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2 mt-2 ">
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                   Phone Number
@@ -100,7 +108,7 @@ function Form() {
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="message" className="block text-sm mt-2 font-medium text-gray-700">
                 Message
               </label>
               <textarea

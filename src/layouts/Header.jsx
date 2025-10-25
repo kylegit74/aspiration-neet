@@ -23,10 +23,15 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  function handleRoute(text) {
-    setisclickoncoursecategory(text);
+ function handleRoute(text) {
+  setisclickoncoursecategory(text);
+  if (location.pathname === "/courses") {
+    window.location.reload(); // force reload
+  } else {
     navigate("/courses");
   }
+}
+
 
   const handleCoursesClick = () => {
     if (isMobile) {

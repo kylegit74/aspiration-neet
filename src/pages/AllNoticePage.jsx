@@ -66,17 +66,20 @@ const AllNoticePage = () => {
     setFilterItem(Notices);
   }, [Notices]);
 
-  useEffect(() => {
-    const filtered = Notices.filter((item) => {
-      if (
-        item?.name?.toLocaleLowerCase().includes(searchTerm.trim('')) ||
-        item?.short_content?.toLocaleLowerCase().includes(searchTerm.trim(''))
-      ) {
-        return item;
-      }
-    });
-    setFilterItem(filtered);
-  }, [searchTerm]);
+useEffect(() => {
+  if (!Notices) return;
+  
+  const filtered = Notices.filter((item) => {
+    const name = item?.name?.toLowerCase() || "";
+    const content = item?.short_content?.toLowerCase() || "";
+    const term = searchTerm.trim().toLowerCase();
+
+    return name.includes(term) || content.includes(term);
+  });
+
+  setFilterItem(filtered);
+}, [searchTerm, Notices]);
+
 
   let finalitems = searchTerm !== "" ? filterItem : Notices;
   function handleNavigate(slug)
@@ -88,7 +91,7 @@ const AllNoticePage = () => {
     <>
       <TopNavbar />
       <MainLayout>
-        <div className="min-h-screen bg-yellow-50 py-6 px-4 sm:px-6 md:px-8 lg:px-10 mt-[100px]">
+        <div className="xl:min-h-screen bg-yellow-50 py-6 px-4 sm:px-6 md:px-8 lg:px-10 mt-[100px]">
           <div className="max-w-5xl mx-auto">
             {/* Page Heading */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-800 text-center mb-4 sm:mb-6">
@@ -105,6 +108,7 @@ const AllNoticePage = () => {
                   className="w-full pl-12 pr-4 py-3 lg:py-4 text-gray-800 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-600 transition-all duration-300"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                   onInput={(e) => setSearchTerm(e.target.value)}  
                 />
               </div>
             </div>

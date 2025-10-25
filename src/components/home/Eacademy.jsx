@@ -36,7 +36,7 @@ const Eacademy = () => {
                 <button  onClick={handleNavigate} className="bg-red-600 hover:bg-red-700 rounded-full px-5 py-2 flex items-center gap-2 text-white font-medium text-sm md:text-base transition-all duration-300">
                   Explore Courses <BiChevronRight className="text-lg md:text-2xl" />
                 </button>
-                <a href="tel:+919998069806" className="border border-white rounded-full px-5 py-2 flex items-center gap-2 text-red-600 font-medium text-sm md:text-base transition-all duration-300">
+                <a href="tel:+919998069806" className="border block sm:hidden xl:block border-white rounded-full px-5 py-2 flex items-center gap-2 text-red-600 font-medium text-sm md:text-base transition-all duration-300">
                   +91 9998069806 <BiChevronRight className="text-lg md:text-2xl" />
                 </a>
               </div>

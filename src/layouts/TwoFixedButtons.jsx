@@ -3,24 +3,11 @@ import { useState, useEffect } from "react";
 function SideFixedButtons() {
   const [show, setShow] = useState(true);
 
-  // Function to toggle visibility on scroll
-  // function ShowWhenOverSpecificScroll() {
-  //   if (window.scrollY > 100) {
-  //     setShow(true);
-  //   } else {
-  //     setShow(false);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", ShowWhenOverSpecificScroll);
-  // }, []);
-
   return (
     <>
       {show && (
         <div
-          className="fixed right-0 top-1/4 flex flex-col items-end gap-2 z-50"
+          className="fixed  right-0 top-[30%] sm:top-1/4 flex flex-col items-end gap-2 z-50"
           id="Floatbutton"
         >
           {/* Prospectus PDF Download */}

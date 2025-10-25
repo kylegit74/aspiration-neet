@@ -86,7 +86,7 @@ const ApplyForm = () => {
         formvalue.qualificationCertificate?.length > 0
       );
     }
-    return true; 
+    return true;
   };
 
 
@@ -98,7 +98,7 @@ const ApplyForm = () => {
       setStep((prev) => Math.min(prev + 1, 4));
     }
   };
-  
+
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
   // const handleChange = (e) => {
@@ -111,7 +111,7 @@ const ApplyForm = () => {
 
   const [course, setCourse] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const[selectedCourse, setSelectedCourse]=useState(null)
+  const [selectedCourse, setSelectedCourse] = useState(null)
   //Fething courses
 
   useEffect(() => {
@@ -131,12 +131,12 @@ const ApplyForm = () => {
     FetchCourse();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
 
 
-  },[selectedCourse])
+  }, [selectedCourse])
 
- 
+
   const filteredbyslug = course.filter((course) => course.course_url_link == slug)
 
   // responsive
@@ -257,7 +257,7 @@ const ApplyForm = () => {
                 {...register("gender", { required: "Select Your Gender" })}
                 className="w-full p-3 border rounded-md mt-3"
                 value={formvalue.gender}
-             >
+              >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -314,14 +314,21 @@ const ApplyForm = () => {
 
               <div className="mt-3">
                 <label className="block mb-1">Upload Your ID Proof (Aadhar Card)</label>
-                <div className="flex">
+                <div className="flex items-stretch relative">
+                  {/* Display file name */}
                   <input
                     type="text"
                     className="w-full p-3 border rounded-l-md"
                     placeholder="No file selected"
-                    value={formvalue.idProof && formvalue.idProof.length > 0 ? formvalue.idProof[0].name : ""}
+                    value={
+                      formvalue.idProof && formvalue.idProof.length > 0
+                        ? formvalue.idProof[0].name
+                        : ""
+                    }
                     readOnly
                   />
+
+                  {/* File input (visible but transparent for mobile compatibility) */}
                   <Controller
                     name="idProof"
                     control={control}
@@ -329,41 +336,46 @@ const ApplyForm = () => {
                     render={({ field }) => (
                       <input
                         type="file"
-                        onChange={(e) => field.onChange(e.target.files)}
-                        className="hidden"
                         id="idProofInput"
+                        onChange={(e) => field.onChange(e.target.files)}
+                        className="absolute right-0 top-0 w-[100px] h-full opacity-0 cursor-pointer"
                       />
                     )}
                   />
+
+                  {/* Upload button */}
                   <label
                     htmlFor="idProofInput"
-                    className="px-4 py-3 bg-red-500 text-white rounded-r-md cursor-pointer"
+                    className="px-4 py-3 bg-red-500 text-white rounded-r-md cursor-pointer relative z-10"
                   >
                     Upload
                   </label>
                 </div>
+
                 {errors.idProof && (
                   <p className="text-red-500 text-sm mt-1">{errors.idProof.message}</p>
                 )}
               </div>
 
+              {/* Qualification Certificate Upload */}
               <div className="mt-3">
-                <label className="block mb-1">Your  Last Qualification Certificate:</label>
-                <div className="flex">
-                  {/* Text input to show file name */}
+                <label className="block mb-1">Your Last Qualification Certificate:</label>
+                <div className="flex items-stretch relative">
+                  {/* Display file name */}
                   <input
                     type="text"
                     className="w-full p-3 border rounded-l-md"
                     placeholder="No file selected"
                     value={
-                      formvalue.qualificationCertificate && formvalue.qualificationCertificate.length > 0
+                      formvalue.qualificationCertificate &&
+                        formvalue.qualificationCertificate.length > 0
                         ? formvalue.qualificationCertificate[0].name
                         : ""
                     }
                     readOnly
                   />
 
-                  {/* Hidden file input */}
+                  {/* File input (visible but transparent for mobile compatibility) */}
                   <Controller
                     name="qualificationCertificate"
                     control={control}
@@ -371,25 +383,29 @@ const ApplyForm = () => {
                     render={({ field }) => (
                       <input
                         type="file"
-                        onChange={(e) => field.onChange(e.target.files)}
-                        className="hidden"
                         id="qualificationCertificateInput"
+                        onChange={(e) => field.onChange(e.target.files)}
+                        className="absolute right-0 top-0 w-[100px] h-full opacity-0 cursor-pointer"
                       />
                     )}
                   />
 
-                  {/* Label acts as button */}
+                  {/* Upload button */}
                   <label
                     htmlFor="qualificationCertificateInput"
-                    className="px-4 py-3 bg-red-500 text-white rounded-r-md cursor-pointer"
+                    className="px-4 py-3 bg-red-500 text-white rounded-r-md cursor-pointer relative z-10"
                   >
-                    Upload </label>
+                    Upload
+                  </label>
                 </div>
 
                 {errors.qualificationCertificate && (
-                  <p className="text-red-500 text-sm mt-1">{errors.qualificationCertificate.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.qualificationCertificate.message}
+                  </p>
                 )}
               </div>
+
 
             </div>
           )}
@@ -410,18 +426,18 @@ const ApplyForm = () => {
                   id="coursename"
                   name="coursename"
 
-                  {...register ("coursename",{required:"please select course "})}
-                  
+                  {...register("coursename", { required: "please select course " })}
+
                   placeholder="Enter course name"
-                  value={selectedCourse? selectedCourse.name :filteredbyslug[0]?.name}
-                  onChange={(e)=>{
-                     const courseobj= course.find((crs)=>crs.name===e.target.value)
-                     setSelectedCourse(courseobj)
+                  value={selectedCourse ? selectedCourse.name : filteredbyslug[0]?.name}
+                  onChange={(e) => {
+                    const courseobj = course.find((crs) => crs.name === e.target.value)
+                    setSelectedCourse(courseobj)
                   }}
                   className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                 >
-                  {course.map((crs)=>
-                  <option>{crs.name}</option>
+                  {course.map((crs) =>
+                    <option>{crs.name}</option>
                   )}
                 </select>
               </div>
@@ -434,11 +450,11 @@ const ApplyForm = () => {
                   type="text"
                   name="courseprice"
                   id="courseprice"
-                  {...register ("courseprice")}
+                  {...register("courseprice")}
 
                   disabled
                   placeholder="Enter course price"
-                  value={selectedCourse? selectedCourse.price: filteredbyslug[0]?.price}
+                  value={selectedCourse ? selectedCourse.price : filteredbyslug[0]?.price}
                   className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                 />
               </div>

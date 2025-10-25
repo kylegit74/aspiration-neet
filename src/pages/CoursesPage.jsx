@@ -15,7 +15,7 @@ export default function CoursesPage() {
 
     return (
         <MainLayout>
-            <div className="min-h-screen bg-gradient-to-br mt-[110px] from-red-50 to-yellow-50 overflow-x-hidden">
+            <div className=" bg-gradient-to-br mt-[110px] from-red-50 to-yellow-50 overflow-x-hidden">
                 <div className="flex flex-col md:flex-row">
                     <FilterSideBar />
                     <div className="flex-1 p-4 lg:p-8 z-[10] relative ">
