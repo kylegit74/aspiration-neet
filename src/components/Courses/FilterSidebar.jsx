@@ -5,10 +5,19 @@ import { Filter } from "lucide-react";
 
 // Added Targeted exams
 function FilterSideBar() {
-  const { category, setCategory, isclickoncoursecategory } =
+  const { category, setCategory, isclickoncoursecategory , setisclickoncoursecategory} =
     useContext(videoContext);
   const [courses, setCourses] = useState([]);
   const [showFilter, setShowFilter] = useState(false)
+
+
+    useEffect(() => {
+    // On reload, restore from localStorage if context is empty
+    const storedCategory = localStorage.getItem("isclickoncoursecategory");
+    if (storedCategory && !isclickoncoursecategory) {
+      setisclickoncoursecategory(storedCategory);
+    }
+  }, [isclickoncoursecategory, setisclickoncoursecategory]);
 
   // State to toggle filter sections
   const [showFilters, setShowFilters] = useState({
@@ -68,7 +77,7 @@ function FilterSideBar() {
 
   useEffect(() => {
     setCategory([]);
-    console.log("getunique", Getuniquecategory); // Clears all selected filters
+    console.log("getunique", Getuniquecategory); 
   }, []);
 
   return (

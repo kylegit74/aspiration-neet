@@ -22,15 +22,21 @@ const Header = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
- function handleRoute(text) {
+function handleRoute(text) {
+  // Save category persistently before reload
+  localStorage.setItem("isclickoncoursecategory", text);
   setisclickoncoursecategory(text);
+
   if (location.pathname === "/courses") {
-    window.location.reload(); // force reload
+    window.location.reload();
   } else {
     navigate("/courses");
+    setTimeout(() => {
+      window.location.reload();
+    }, 200);
   }
 }
+
 
 
   const handleCoursesClick = () => {

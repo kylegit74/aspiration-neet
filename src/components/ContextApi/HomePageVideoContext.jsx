@@ -12,9 +12,17 @@ function VideoContextProvider({ children }) {
     return savedCategory ? JSON.parse(savedCategory) : [];
   });
 
-  const [isclickoncoursecategory, setisclickoncoursecategory] = useState(() => {
+   const [isclickoncoursecategory, setisclickoncoursecategory] = useState(() => {
     return localStorage.getItem("isclickoncoursecategory") || null;
   });
+
+  useEffect(() => {
+    if (isclickoncoursecategory) {
+      localStorage.setItem("isclickoncoursecategory", isclickoncoursecategory);
+    }
+  }, [isclickoncoursecategory]);
+
+
 
   const [price, setPrice] = useState();
 
@@ -23,12 +31,7 @@ function VideoContextProvider({ children }) {
     localStorage.setItem("category", JSON.stringify(category));
   }, [category]);
 
-  // Save isclickoncoursecategory to localStorage whenever it changes
-  useEffect(() => {
-    if (isclickoncoursecategory !== null) {
-      localStorage.setItem("isclickoncoursecategory", isclickoncoursecategory);
-    }
-  }, [isclickoncoursecategory]);
+
 
   // Debugging: Log changes to search query
   useEffect(() => {
