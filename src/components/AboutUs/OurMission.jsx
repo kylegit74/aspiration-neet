@@ -1,4 +1,5 @@
 import { BookOpen, Target, Users } from 'lucide-react'
+import students from '../../Imagesall/neetstudent (1).jpeg'
 
 function OurMission() {
   const features = [
@@ -45,7 +46,7 @@ function OurMission() {
             <div className="overflow-hidden rounded-2xl shadow-sm transition-all hover:shadow-2xl">
               {/** this is a image address i did not download any iamge */}
               <img
-                src="https://t4.ftcdn.net/jpg/05/18/65/75/360_F_518657595_keQdDMCfv8SgYvjOgPMe8BCx7hkuplIf.jpg"
+                src={students}
                 alt="Students in classroom"
                 className="h-56 w-full object-cover transition-transform duration-500 hover:scale-105 sm:h-72 md:h-96"
               />

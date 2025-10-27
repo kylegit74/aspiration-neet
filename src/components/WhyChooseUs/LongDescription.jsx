@@ -1,3 +1,6 @@
+
+
+import neetstudent from '../../Imagesall/neetstudent.jpeg'
 const LongDescription = () => {
   return (
     <div className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 z-[-200px]">

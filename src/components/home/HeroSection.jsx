@@ -43,11 +43,11 @@ const HeroSection = () => {
         <div className="hero-section mt-[100px] w-full overflow-hidden">
           {banners.length > 0 ? (
             <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
+              modules={[ Pagination, Autoplay]}
               spaceBetween={10}
               slidesPerView={1}
               loop={true}
-              navigation
+              
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
               className="w-full max-w-[1600px] mx-auto"

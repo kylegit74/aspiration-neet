@@ -143,6 +143,7 @@ function FilterSideBar() {
                   type="checkbox"
                   value={isclickoncoursecategory}
                   checked={isclickoncoursecategory}
+                 
                   className="mr-2 cursor-pointer appearance-none w-5 h-5 border-2 border-red-600 rounded bg-white checked:bg-red-600 checked:border-red-600 relative checked:before:content-['✔'] checked:before:text-white checked:before:absolute checked:before:top-1/2 checked:before:left-1/2 checked:before:-translate-x-1/2 checked:before:-translate-y-1/2 checked:before:text-sm font-bold flex items-center justify-center"
                 />
                 {isclickoncoursecategory}

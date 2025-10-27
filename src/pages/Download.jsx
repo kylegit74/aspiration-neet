@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Search,
-  Calendar,
-} from "lucide-react";
+import { Search, Calendar } from "lucide-react";
 import NotFoundNotice from "../components/NotFound";
 import TopNavbar from "../layouts/TopNavbar";
 import MainLayout from "../layouts/MainLayout";
@@ -12,10 +9,9 @@ import { Link } from "react-router-dom";
 
 const NoticeView = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategories, setSelectedCategories] = useState([]); // <-- changed from single to array
   const [isLoading, setIsLoading] = useState(false);
   const [downloads, setDownloads] = useState([]);
-  const [categories, setCategories] = useState([]);
 
   // Fetch notices
   async function fetchDownloadData() {
@@ -24,7 +20,7 @@ const NoticeView = () => {
       const res = await FetchAllDownloadData();
       setDownloads(res.data);
       setIsLoading(false);
-      console.log('download',res.data)
+      console.log("download", res.data);
     } catch (error) {
       setIsLoading(false);
     }
@@ -37,35 +33,40 @@ const NoticeView = () => {
   // Get unique categories
   const uniqueCategories = [
     ...new Set(downloads.map((item) => item.category)),
-  ];
+  ].filter(Boolean);
 
-//unselecting 
-function SelectedCategorySet(text)
-{
-  if(text===selectedCategory)
-  {
-    setSelectedCategory("all");
-  }
-  else{
-   setSelectedCategory(text)
-  }
-
-}
+  // Toggle category selection
+  const toggleCategory = (category) => {
+    const normalizedCategory = category.toLowerCase();
+    if (selectedCategories.includes(normalizedCategory)) {
+      // remove if already selected
+      setSelectedCategories(
+        selectedCategories.filter((c) => c !== normalizedCategory)
+      );
+    } else {
+      // add new selection
+      setSelectedCategories([...selectedCategories, normalizedCategory]);
+    }
+  };
 
   // Filtered notices
   const filteredNotices = downloads.filter((notice) => {
     const matchesSearch =
-      notice?.name?.toLowerCase().includes(searchTerm.trim('').toLowerCase()) ||
-      notice?.full_content?.toLowerCase().includes(searchTerm.trim('').toLowerCase());
+      notice?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
+      notice?.full_content
+        ?.toLowerCase()
+        .includes(searchTerm.trim().toLowerCase());
+
     const matchesCategory =
-      selectedCategory.toLowerCase() === "all" ||
-      notice?.category?.toLowerCase() === selectedCategory.toLowerCase();
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(notice?.category?.toLowerCase());
+
     return matchesSearch && matchesCategory;
   });
 
   const resetFilters = () => {
     setSearchTerm("");
-    setSelectedCategory("all");
+    setSelectedCategories([]);
   };
 
   return (
@@ -76,7 +77,9 @@ function SelectedCategorySet(text)
           <div className="max-w-7xl mx-auto py-1">
             {/* Header */}
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-red-800 mb-2  mt-10 sm:mt-2">Download</h1>
+              <h1 className="text-4xl font-bold text-red-800 mb-2 mt-10 sm:mt-2">
+                Download
+              </h1>
               <p className="text-yellow-700">
                 Stay updated with the latest announcements
               </p>
@@ -96,17 +99,17 @@ function SelectedCategorySet(text)
                   />
                 </div>
 
-                {/* Categories */}
+                {/* Category Buttons */}
                 <div className="flex gap-2 overflow-x-auto pb-2">
                   {uniqueCategories.map((category) => (
                     <button
                       key={category}
-                      className={`px-2 py-1 rounded-lg whitespace-nowrap transition-colors ${
-                        selectedCategory.toLowerCase() === category.toLowerCase()
+                      className={`px-3 py-1 rounded-lg whitespace-nowrap transition-colors ${
+                        selectedCategories.includes(category.toLowerCase())
                           ? "bg-red-600 text-white"
                           : "bg-yellow-200 text-red-700 hover:bg-yellow-300"
                       }`}
-                      onClick={()=>SelectedCategorySet(category.toLowerCase())}
+                      onClick={() => toggleCategory(category)}
                     >
                       {category}
                     </button>
@@ -145,7 +148,7 @@ function SelectedCategorySet(text)
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
                       <a
                         href={`https://admin.aspirationjeeneet.in/${notice?.pdf_uploaded}`}
-                        className="w-full sm:w-auto text-center text-red-600 hover:underline bg-[#FFCC01]  px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-black  text-sm sm:text-base"
+                        className="w-full sm:w-auto text-center text-red-600 hover:underline bg-[#FFCC01] px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-black text-sm sm:text-base"
                       >
                         Download PDF
                       </a>

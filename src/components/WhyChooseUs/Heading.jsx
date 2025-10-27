@@ -9,6 +9,7 @@ import {
   Trophy 
 } from "lucide-react";
 
+import neetstudent from '../../Imagesall/neetstudent.jpeg'
 
 const WhyChooseUsHeading = () => {
   return (
@@ -79,7 +80,7 @@ const WhyChooseUsHeading = () => {
         {/* Right Side - Image */}
         <div className="w-full overflow-hidden rounded-xl shadow-lg">
           <img
-            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80"
+            src={neetstudent}
             className="w-full h-60 sm:h-72 md:h-[400px] object-cover transition-transform duration-500 hover:scale-105"
             alt="Education"
           />
