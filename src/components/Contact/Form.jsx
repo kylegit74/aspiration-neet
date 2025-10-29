@@ -48,7 +48,8 @@ function Form() {
           </div>
 
           {/* Contact Form */}
-          <form className="w-full max-w-lg rounded-xl bg-white p-6 sm:p-8 shadow-lg flex flex-col">
+          <form className="w-full max-w-lg rounded-xl bg-white p-6 sm:p-8 shadow-lg flex flex-col" action="https://admin.aspirationjeeneet.in/manage/contact_form"
+            method="POST">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">

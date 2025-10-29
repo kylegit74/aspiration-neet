@@ -21,6 +21,7 @@ import CourseDetailsPage from './pages/CourseDetailsPage';
 import ScholarshipPage from './pages/ScholarshipPage';
 import ApplyForm from './pages/ApplyForm';
 import SideFixedButtons from './layouts/TwoFixedButtons';
+import ThankYou from './pages/Thank-you';
 
 const Home=lazy(()=>import('../src/pages/Home'));
 const AboutUs=lazy(()=>import('../src/pages/About'));
@@ -54,6 +55,7 @@ function App() {
         <Route path='/courses/:slug' element={<CourseDetailsPage/>}/>
         <Route path='/scholarship' element={<ScholarshipPage/>}/>
         <Route path='/course/apply/:slug' element={<ApplyForm/>}/>
+        <Route path='/thank-you' element={<ThankYou/>}/>
       </Routes>
       <FloatingContactButton/>
       <SideFixedButtons/>
